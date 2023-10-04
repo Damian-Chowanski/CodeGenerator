@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
     static Random rand = new Random();
     static int numberOfCodes;
-    static ArrayList<String> codes = new ArrayList<>();
+    static ArrayList<String> generatedCodes = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -14,15 +14,14 @@ public class Main {
     }
 
     private static void displayCodes() {
-        for (String code : codes) {
+        for (String code : generatedCodes) {
             double usedChance = 0.65;
             double winChance = 0.95;
-
 
             if (rand.nextDouble() > usedChance) {
                 System.out.println("kod: " + code + " Został już użyty");
             } else if (rand.nextDouble() > winChance) {
-                    System.out.println("Kod " + code + " Wygrywa!");
+                System.out.println("Kod " + code + " Wygrywa!");
             } else System.out.println("Kod " + code + " Nie został jeszcze użyty i nie jest zwycięski");
 
         }
@@ -38,7 +37,9 @@ public class Main {
             for (int j = 0; j < codeLength; j++) {
                 code += (char) rir.getRandom();
             }
-            codes.add(code);
+            if (generatedCodes.contains(code)){
+                i--;
+            } else generatedCodes.add(code);
         }
     }
 
