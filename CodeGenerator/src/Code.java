@@ -17,7 +17,7 @@ public class Code {
         this.code = code;
     }
 
-    public boolean isWinning() {
+    public boolean getIsWinning() {
         return isWinning;
     }
 
@@ -25,7 +25,7 @@ public class Code {
         isWinning = winning;
     }
 
-    public boolean isUsed() {
+    public boolean getIsUsed() {
         return isUsed;
     }
 

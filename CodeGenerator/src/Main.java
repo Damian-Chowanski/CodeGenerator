@@ -33,8 +33,8 @@ public class Main {
                 lottery.addNewCode();
                 menu();
             case "2":
-                System.out.println("Edytuj");
-                System.out.println();
+                lottery.displayCodes();
+                lottery.editCode();
                 menu();
             case "3":
                 System.out.println("Usuń");

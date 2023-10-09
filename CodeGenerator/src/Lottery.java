@@ -20,9 +20,7 @@ public class Lottery {
     public void addNewCode() {
 
         System.out.println("Wpisz kod który mam dodać: ");
-        String newCode = sc.nextLine();
-
-        newCode = codeValidation(newCode);
+        String newCode = codeValidation("");
 
         boolean isWinning = false;
         System.out.println("Czy ten kod został już użyty? \n" +
@@ -71,7 +69,29 @@ public class Lottery {
     }
     public void displayCodes() {
         for (Code code: codes){
-            System.out.println(codes.indexOf(code)+1 + ". " + code.getCode());
+            System.out.println(codes.indexOf(code)+1 + ". " + code.getCode() +
+                    " Użyty: " + code.getIsUsed() +
+                    " Wygrany: " + code.getIsWinning());
+        }
+    }
+
+    public void editCode() {
+        System.out.println("Wybierz kod który chciałbyś edytować");
+        int selection = new Scanner(System.in).nextInt()-1;
+        Code selectedCode = codes.get(selection);
+        System.out.println("Czy chcesz zmienic jego numery? [T/N]: ");
+        boolean editCodeText = new Scanner(System.in).nextLine().equalsIgnoreCase("t");
+        if (editCodeText){
+            String newCode = codeValidation("");
+            codes.get(selection).setCode(newCode);
+            System.out.println(codes.get(selection).getCode());
+            setValuesForSameCodes(newCode, selectedCode.isUsed, selectedCode.isWinning);
+        }
+        System.out.println("Czy chcesz ustawić zmienić jego status użycia? [T/N]: ");
+        boolean editUseStatus = new Scanner(System.in).nextLine().equalsIgnoreCase("t");
+        if (editUseStatus){
+            selectedCode.setUsed(!(selectedCode.getIsUsed()));
+            System.out.println("Dla wybranego kodu status uzycia został zmieniony na: " + selectedCode.getIsUsed());
         }
     }
 }
