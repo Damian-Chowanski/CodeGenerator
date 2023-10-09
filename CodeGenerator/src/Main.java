@@ -16,6 +16,7 @@ public class Main {
         sc = new Scanner(System.in);
 
         System.out.print("""
+                **************************************
                 Wybierz opcje, która cię interesuje:\s
                 1. Dodaj kolejny kupon do listy
                 2. Edytuj wybrany kupon
@@ -23,7 +24,7 @@ public class Main {
                 4. Wyświetl listę kodów
                 5. Wygeneruj nową listę kodów
                 0. Zamknij program.
-
+                **************************************
                 Twój wybór [1-3]:\s""");
         String selection = sc.nextLine();
         System.out.println();
@@ -37,8 +38,7 @@ public class Main {
                 lottery.editCode();
                 menu();
             case "3":
-                System.out.println("Usuń");
-                System.out.println();
+                lottery.removeCode();
                 menu();
             case "4":
                 lottery.displayCodes();
