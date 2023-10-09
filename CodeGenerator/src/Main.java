@@ -4,33 +4,66 @@ public class Main {
     static Random rand = new Random();
     static int numberOfCodes;
     static ArrayList<String> generatedCodes = new ArrayList<>();
+    static Lottery lottery = new Lottery();
+    static Scanner sc;
+
 
     public static void main(String[] args) {
-
-        System.out.print("Podaj ile kodów mam dla Ciebie wygenerować: ");
-        getNumberOfCodes();
         generateCodes();
-        displayCodes();
+        saveCodesForCurrentLottery(lottery);
+        menu();
     }
 
-    private static void displayCodes() {
+    private static void menu() {
+        sc = new Scanner(System.in);
+        System.out.print("Wybierz opcje, która cię interesuje: \n" +
+                "1. Dodaj kolejny kupon do listy\n" +
+                "2. Edytuj wybrany kupon\n" +
+                "3. Usuń wybrany kupon\n" +
+                "0. Zamknij program.\n\n" +
+                "Twój wybór [1-3]: ");
+        String selection = sc.nextLine();
+        System.out.println();
+        switch(selection) {
+            case "1":
+                lottery.addNewCode();
+                menu();
+            case "2":
+                System.out.println("Edytuj");
+                System.out.println();
+                menu();
+            case "3":
+                System.out.println("Usuń");
+                System.out.println();
+                menu();
+            case "0":
+                break;
+            default:
+                System.out.println("Podałeś nieprawidłową wartość");
+        }
+
+    }
+
+    private static void saveCodesForCurrentLottery(Lottery lottery) {
         for (String code : generatedCodes) {
             double usedChance = 0.65;
             double winChance = 0.95;
 
             if (rand.nextDouble() > usedChance) {
-                System.out.println("kod: " + code + " Został już użyty");
+                lottery.getCodes().add(new Code(code,false,true));
             } else if (rand.nextDouble() > winChance) {
-                System.out.println("Kod " + code + " Wygrywa!");
-            } else System.out.println("Kod " + code + " Nie został jeszcze użyty i nie jest zwycięski");
-
+                lottery.getCodes().add(new Code(code,true,false));
+            } else lottery.getCodes().add(new Code(code,false,false));
         }
     }
 
     private static void generateCodes() {
+        System.out.print("Podaj ile kodów mam dla Ciebie wygenerować: ");
+        getNumberOfCodes();
         RandomInRanges rir = new RandomInRanges(48, 57);
         rir.addRange(65, 90);
         rir.addRange(97, 122);
+
         for (int i = 0; i < numberOfCodes; i++) {
             int codeLength = rand.nextInt(5, 11);
             String code = "";
