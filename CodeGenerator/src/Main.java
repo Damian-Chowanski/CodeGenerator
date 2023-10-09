@@ -25,11 +25,11 @@ public class Main {
                 5. Wygeneruj nową listę kodów
                 0. Zamknij program.
                 **************************************
-                Twój wybór [1-3]:\s""");
+                Twój wybór [1-5]:\s""");
         String selection = sc.nextLine();
         System.out.println();
 
-        switch(selection) {
+        switch (selection) {
             case "1":
                 lottery.addNewCode();
                 menu();
@@ -61,10 +61,10 @@ public class Main {
             double winChance = 0.95;
 
             if (rand.nextDouble() > usedChance) {
-                lottery.getCodes().add(new Code(code,false,true));
+                lottery.getCodes().add(new Code(code, false, true));
             } else if (rand.nextDouble() > winChance) {
-                lottery.getCodes().add(new Code(code,true,false));
-            } else lottery.getCodes().add(new Code(code,false,false));
+                lottery.getCodes().add(new Code(code, true, false));
+            } else lottery.getCodes().add(new Code(code, false, false));
         }
     }
 
@@ -82,7 +82,7 @@ public class Main {
             for (int j = 0; j < codeLength; j++) {
                 code += (char) rir.getRandom();
             }
-            if (generatedCodes.contains(code)){
+            if (generatedCodes.contains(code)) {
                 i--;
             } else generatedCodes.add(code);
         }
