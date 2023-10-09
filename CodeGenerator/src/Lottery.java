@@ -33,8 +33,22 @@ public class Lottery {
                     "Wpisz T jeśli tak lub N jeśli nie: ");
              isWinning = sc.nextLine().equalsIgnoreCase("t");
         }
-
+        setValuesForSameCodes(newCode,isUsed,isWinning);
         this.codes.add(new Code(newCode,isWinning,isUsed));
+    }
+
+    private void setValuesForSameCodes(String newCode, boolean isUsed, boolean isWinning) {
+        sc = new Scanner(System.in);
+        for (Code code:codes){
+            if(code.getCode().equals(newCode)){
+                System.out.println("Wpisany kod znajduje się już na liście. Czy chcesz go nadpisać swoimi wartościami?\n" +
+                        "Wpisz T jeśli tak lub N jeśli nie: ");
+                if (sc.nextLine().equalsIgnoreCase("t")) {
+                    code.setUsed(isUsed);
+                    code.setWinning(isWinning);
+                }
+            }
+        }
     }
 
     private String codeValidation(String newCode) {

@@ -14,6 +14,7 @@ public class Main {
 
     private static void menu() {
         sc = new Scanner(System.in);
+
         System.out.print("""
                 Wybierz opcje, która cię interesuje:\s
                 1. Dodaj kolejny kupon do listy
@@ -26,6 +27,7 @@ public class Main {
                 Twój wybór [1-3]:\s""");
         String selection = sc.nextLine();
         System.out.println();
+
         switch(selection) {
             case "1":
                 lottery.addNewCode();
